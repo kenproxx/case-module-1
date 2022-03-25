@@ -11,6 +11,7 @@ let speed = 3000;
 let reSpeed = 500
 let score = 0
 let level = 1
+let truHp = 5
 
 let scoreArea = document.getElementById('score')
 scoreArea.innerHTML = 'Level: ' + level + '<br>' +
@@ -18,7 +19,7 @@ scoreArea.innerHTML = 'Level: ' + level + '<br>' +
     localStorage.getItem('score')
 
 function updateScore(){
-    score += 10
+    score += 10 * level
     if (score > localStorage.getItem('score')){
         localStorage.setItem('score', score)
     }
@@ -28,9 +29,10 @@ function updateScore(){
         + localStorage.getItem('score')
     if (score % 100 == 0){
         level++
-        speedShoot -= 150;
-        speed -= 600
+        speedShoot -= 70;
+        speed -= 150
         reSpeed -= 100
+        truHp += 5
     }
 }
 function reEnemy(enemy){
@@ -38,7 +40,7 @@ function reEnemy(enemy){
         setTimeout(()=>{
             enemy.classList.remove('dead')
             enemy.classList.toggle('showing')
-        },500)
+        },reSpeed)
     }
 }
 
@@ -72,7 +74,7 @@ function enemyShootsMe(enemy) {
 
         enemy.classList.add('shooting');
 
-        updateHealthPoints(healthPoints - 20);
+        updateHealthPoints(healthPoints - truHp);
 
         setTimeout(() => {
             enemy.classList.remove('shooting')
@@ -88,7 +90,7 @@ function randomEnemyAttacks() {
     let randomEnemyNo = Math.random() * livingEnemies().length;
     randomEnemyNo = Math.floor(randomEnemyNo)
     let enemy = livingEnemies()[randomEnemyNo]
-    let randomDelay = Math.random() * 2000 + 1000
+    let randomDelay = Math.random() * speed + reSpeed
     setTimeout(() => {
         enemyAttacksMe(enemy)
         randomEnemyAttacks()
@@ -116,14 +118,9 @@ function newGame() {
     document.querySelector('button').style.display = 'none';
 }
 
-
-
-
 window.addEventListener('keydown', (evt)=>{
     if (evt.keyCode == 32){
         updateHealthPoints(99999999999999)
 
     }
 })
-
-
