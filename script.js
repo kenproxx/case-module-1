@@ -1,4 +1,4 @@
-let myGunSound = new Audio('audio/3z2.mp3')
+let myGunSound = new Audio('audio/myGun.m4a')
 let enemyGunSound = new Audio("audio/enemySound.mp3")
 let music = new Audio('audio/music.mp3')
 let loseSound = new Audio('audio/lose.mp3')
