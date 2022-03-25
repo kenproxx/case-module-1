@@ -2,13 +2,13 @@ let myGunSound = new Audio('audio/3z.mp3')
 let enemyGunSound = new Audio("audio/enemySound.mp3")
 let music = new Audio('audio/music.mp3')
 let loseSound = new Audio('audio/lose.mp3')
-music.volume = .3
-enemyGunSound.volume = .7
+music.volume = 0.3
+enemyGunSound.volume = 0.7
 music.loop = true
 
-let speedShoot = 1000;
+let speedShoot = 1500;
 let speed = 3000;
-let reSpeed = 500
+let reSpeed = 2000
 let score = 0
 let level = 1
 let truHp = 5
@@ -29,9 +29,9 @@ function updateScore(){
         + localStorage.getItem('score')
     if (score % 100 == 0){
         level++
-        speedShoot -= 70;
-        speed -= 150
-        reSpeed -= 100
+        speedShoot -= 115;
+        speed -= 230
+        reSpeed -= 153
         truHp += 5
     }
 }
@@ -121,6 +121,5 @@ function newGame() {
 window.addEventListener('keydown', (evt)=>{
     if (evt.keyCode == 32){
         updateHealthPoints(99999999999999)
-
     }
 })
