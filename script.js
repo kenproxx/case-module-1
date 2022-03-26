@@ -131,7 +131,7 @@ let checkHack = true
 window.addEventListener('keypress', (evt) => {
         if (evt.keyCode == 13) {
             if (checkHack) {
-                hack.innerHTML = '<center><input id="hackCode" type="text" ></center>'
+                hack.innerHTML = '<center><input id="hackCode" type="text" autofocus></center>'
             } else {
                 let hackValue = document.getElementById('hackCode').value
                 if (hackValue == 'hp') {

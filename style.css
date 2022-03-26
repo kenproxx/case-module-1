@@ -150,6 +150,7 @@ button {
     left: 645px;
 }
 
+
 .enemy.dead {
     background: #222;
     transform: rotate(-90deg);
