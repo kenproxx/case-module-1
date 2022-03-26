@@ -10,37 +10,44 @@ let speedShoot = 1500;
 let speed = 3000;
 let reSpeed = 2000
 let score = 0
-let level = 1
+let currentLevel = 1
 let truHp = 5
+let i = 1
+console.log(i++);
 
 let scoreArea = document.getElementById('score')
-scoreArea.innerHTML = 'Level: ' + level + '<br>' +
+scoreArea.innerHTML = 'Level: ' + currentLevel + '<br>' +
     'Score: ' + score + '<br>' + 'High Score: ' +
     localStorage.getItem('score')
 
-function updateScore(){
-    score += 10 * level
-    if (score > localStorage.getItem('score')){
+function level(num) {
+    speedShoot -= 115 * num
+    speed -= 230 * num
+    reSpeed -= 153 * num
+    truHp += 5 * num
+}
+
+function updateScore() {
+    score += 10 * currentLevel
+    if (score > localStorage.getItem('score')) {
         localStorage.setItem('score', score)
     }
 
-    scoreArea.innerHTML = 'Level: ' + level + '<br>' +
+    scoreArea.innerHTML = 'Level: ' + currentLevel + '<br>' +
         'Score: ' + score + '<br>' + 'High Score: '
         + localStorage.getItem('score')
-    if (score % 100 == 0){
-        level++
-        speedShoot -= 115;
-        speed -= 230
-        reSpeed -= 153
-        truHp += 5
+    if (score % 100 == 0) {
+        level(currentLevel++)
+
     }
 }
-function reEnemy(enemy){
-    if (enemy.classList.contains('dead')){
-        setTimeout(()=>{
+
+function reEnemy(enemy) {
+    if (enemy.classList.contains('dead')) {
+        setTimeout(() => {
             enemy.classList.remove('dead')
             enemy.classList.toggle('showing')
-        },reSpeed)
+        }, reSpeed)
     }
 }
 
@@ -49,11 +56,11 @@ function iShoot(enemy) {
     updateScore()
     reEnemy(enemy)
     if (!livingEnemies().length) {
-        setTimeout(function (){
+        setTimeout(function () {
             alert('WIN');
             window.location.reload()
 
-        },1000)
+        }, 1000)
     }
 }
 
@@ -118,8 +125,25 @@ function newGame() {
     document.querySelector('button').style.display = 'none';
 }
 
-window.addEventListener('keydown', (evt)=>{
-    if (evt.keyCode == 32){
-        updateHealthPoints(99999999999999)
+let hack = document.getElementById('hack')
+let checkHack = true
+
+window.addEventListener('keypress', (evt) => {
+        if (evt.keyCode == 13) {
+            if (checkHack) {
+                hack.innerHTML = '<center><input id="hackCode" type="text" ></center>'
+            } else {
+                let hackValue = document.getElementById('hackCode').value
+                if (hackValue == 'hp') {
+
+                    updateHealthPoints(99999999999999)
+                }
+                hack.innerHTML = ''
+            }
+            checkHack = !checkHack
+
+        }
     }
-})
+)
+
+
