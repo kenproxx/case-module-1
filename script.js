@@ -4,7 +4,6 @@ let music = new Audio('audio/music.mp3')
 let loseSound = new Audio('audio/lose.mp3')
 music.volume = 0.3
 enemyGunSound.volume = 0.7
-music.loop = true
 
 let speedShoot = 1500;
 let speed = 3000;
@@ -12,8 +11,6 @@ let reSpeed = 2000
 let score = 0
 let currentLevel = 1
 let truHp = 5
-let i = 1
-console.log(i++);
 
 let scoreArea = document.getElementById('score')
 scoreArea.innerHTML = 'Level: ' + currentLevel + '<br>' +
